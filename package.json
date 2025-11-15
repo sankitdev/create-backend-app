@@ -1,0 +1,32 @@
+{
+  "name": "create-backend-app",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "create-backend-app": "dist/bin/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/bin/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sankitdev/create-backend-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/sankitdev/create-backend-app/issues"
+  },
+  "homepage": "https://github.com/sankitdev/create-backend-app#readme",
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

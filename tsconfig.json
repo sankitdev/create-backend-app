@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "target": "es2020", // to support latest features
+    "module": "es2020", // using esm for imports etc
+    "esModuleInterop": true, // allows to import common js package using ESM syntax
+    "strict": true, // enable all typescript checks
+    "allowJs": false,
+    "moduleResolution": "node" // tells ts to resolve module imports
+  },
+  "include": ["src", "src/bin"],
+  "exclude": ["node_modules", "dist"]
+}

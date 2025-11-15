@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-console.log("CLI running!");
+import "../cli/main.js";

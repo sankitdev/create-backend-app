@@ -24,12 +24,14 @@
   },
   "homepage": "https://github.com/sankitdev/create-backend-app#readme",
   "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^24.10.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "commander": "^14.0.2"
+    "commander": "^14.0.2",
+    "fs-extra": "^11.3.2"
   }
 }

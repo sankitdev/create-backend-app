@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs-extra";
 
-export async function scaffold(projectName: string) {
+export async function scaffold(projectName: string, templateDir: string) {
   // 1. Get cwd
   const cwd = process.cwd();
   console.log(cwd, "current working directory");
@@ -20,7 +20,41 @@ export async function scaffold(projectName: string) {
     await fs.ensureDir(targetPath);
   }
 
-  console.log("Final scaffold path:", targetPath);
+  // 5. Verify template directory exists
+  const templateExists = await fs.pathExists(templateDir);
+  if (!templateExists) {
+    console.error(`Error: Template directory not found at ${templateDir}`);
+    process.exit(1);
+  }
+
+  console.log("Copying template files....");
+
+  try {
+    await fs.copy(templateDir, targetPath, {
+      overwrite: false,
+      errorOnExist: false,
+      filter: (src) => {
+        const relativePath = path.relative(templateDir, src);
+        if (relativePath) {
+          console.log(` Copying: ${relativePath}`);
+        }
+        return true;
+      },
+    });
+    console.log("✓ Template files copied successfully!");
+  } catch (error) {
+    console.error("Error copying template files:", error);
+    process.exit(1);
+  }
+
+  console.log("\n✨ Project scaffolded successfully!");
+  console.log(`\nNext steps:`);
+
+  if (projectName !== ".") {
+    console.log(`  cd ${projectName}`);
+  }
+  console.log(`  npm install`);
+  console.log(`  npm run dev`);
 
   return targetPath;
 }

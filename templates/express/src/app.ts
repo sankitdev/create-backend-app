@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import { errorHandler } from "./middleware/errorHandler";
-// import userRoutes from "./routes/user.routes";
+import { userRouter } from "./routes";
 
 export const app = express();
 
@@ -20,7 +20,7 @@ app.get("/health", (_, res) => {
 });
 
 // API routes
-// app.use("/api/users", userRoutes);
+app.use("/api/users", userRouter);
 
 // 404 handler
 app.use((req, res) => {

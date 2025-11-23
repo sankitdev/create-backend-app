@@ -2,10 +2,13 @@
   "name": "create-backend-app",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/bin/index.js",
   "bin": {
     "create-backend-app": "dist/bin/index.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/bin/index.ts",
@@ -15,8 +18,15 @@
     "type": "git",
     "url": "git+https://github.com/sankitdev/create-backend-app.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "cli",
+    "backend",
+    "generator",
+    "scaffold",
+    "express",
+    "nodejs"
+  ],
+  "author": "sankitdev",
   "license": "ISC",
   "type": "module",
   "bugs": {

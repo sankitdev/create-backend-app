@@ -35,6 +35,31 @@ export async function scaffold(projectName: string, templateDir: string) {
       errorOnExist: false,
       filter: (src) => {
         const relativePath = path.relative(templateDir, src);
+        
+        // Exclude common folders and files that shouldn't be copied
+        const excludePatterns = [
+          'node_modules',
+          '.git',
+          'dist',
+          'build',
+          'coverage',
+          '.env',
+          '.DS_Store',
+          'package-lock.json',
+          'yarn.lock',
+          'pnpm-lock.yaml'
+        ];
+        
+        // Check if any part of the path matches excluded patterns
+        const shouldExclude = excludePatterns.some(pattern => {
+          const parts = relativePath.split(path.sep);
+          return parts.includes(pattern) || relativePath === pattern;
+        });
+        
+        if (shouldExclude) {
+          return false; // Don't copy this file/folder
+        }
+        
         if (relativePath) {
           console.log(` Copying: ${relativePath}`);
         }

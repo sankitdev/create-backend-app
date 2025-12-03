@@ -16,6 +16,9 @@ export class BaseService<T extends Document> {
 
   /**
    * Create a new document
+   * 
+   * @param data - The data to create the document with
+   * @returns The created document
    */
   async create(data: Partial<T>): Promise<T> {
     try {
@@ -32,7 +35,10 @@ export class BaseService<T extends Document> {
   }
 
   /**
-   * Find document by ID
+   * Find a document by ID
+   * 
+   * @param id - The ID of the document to find
+   * @returns The found document
    */
   async findById(id: string): Promise<T> {
     try {
@@ -51,6 +57,8 @@ export class BaseService<T extends Document> {
 
   /**
    * Find all documents
+   * 
+   * @returns An array of documents
    */
   async findAll(): Promise<T[]> {
     try {
@@ -64,6 +72,10 @@ export class BaseService<T extends Document> {
 
   /**
    * Update document by ID
+   * 
+   * @param id - The ID of the document to update
+   * @param data - The data to update the document with
+   * @returns The updated document
    */
   async update(id: string, data: Partial<T>): Promise<T> {
     try {
@@ -87,6 +99,9 @@ export class BaseService<T extends Document> {
 
   /**
    * Delete document by ID
+   * 
+   * @param id - The ID of the document to delete
+   * @returns The deleted document
    */
   async delete(id: string): Promise<T> {
     try {

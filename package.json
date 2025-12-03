@@ -1,5 +1,5 @@
 {
-  "name": "create-backend-app",
+  "name": "@sankitdev/create-backend-app",
   "version": "0.1.1",
   "description": "",
   "main": "dist/bin/index.js",

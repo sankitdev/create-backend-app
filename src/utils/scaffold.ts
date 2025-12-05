@@ -35,7 +35,7 @@ export async function scaffold(projectName: string, templateDir: string) {
       errorOnExist: false,
       filter: (src) => {
         const relativePath = path.relative(templateDir, src);
-        
+
         // Exclude common folders and files that shouldn't be copied
         const excludePatterns = [
           'node_modules',
@@ -49,17 +49,17 @@ export async function scaffold(projectName: string, templateDir: string) {
           'yarn.lock',
           'pnpm-lock.yaml'
         ];
-        
+
         // Check if any part of the path matches excluded patterns
         const shouldExclude = excludePatterns.some(pattern => {
           const parts = relativePath.split(path.sep);
           return parts.includes(pattern) || relativePath === pattern;
         });
-        
+
         if (shouldExclude) {
           return false; // Don't copy this file/folder
         }
-        
+
         if (relativePath) {
           console.log(` Copying: ${relativePath}`);
         }
@@ -67,6 +67,14 @@ export async function scaffold(projectName: string, templateDir: string) {
       },
     });
     console.log("✓ Template files copied successfully!");
+
+    // renaming gitignore to .gitignore (cause npm doesn't include it)
+    const gitignorePath = path.join(targetPath, "gitignore");
+    const dotGitignorePath = path.join(targetPath, ".gitignore");
+
+    if (await fs.pathExists(gitignorePath)) {
+      await fs.rename(gitignorePath, dotGitignorePath);
+    }
   } catch (error) {
     console.error("Error copying template files:", error);
     process.exit(1);

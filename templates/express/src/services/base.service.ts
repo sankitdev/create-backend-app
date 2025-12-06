@@ -1,4 +1,4 @@
-import { Model, Document } from "mongoose";
+import { Model, Document, FilterQuery } from "mongoose";
 import { logger } from "../utils/logger";
 
 /**
@@ -16,7 +16,7 @@ export class BaseService<T extends Document> {
 
   /**
    * Create a new document
-   * 
+   *
    * @param data - The data to create the document with
    * @returns The created document
    */
@@ -36,7 +36,7 @@ export class BaseService<T extends Document> {
 
   /**
    * Find a document by ID
-   * 
+   *
    * @param id - The ID of the document to find
    * @returns The found document
    */
@@ -57,7 +57,7 @@ export class BaseService<T extends Document> {
 
   /**
    * Find all documents
-   * 
+   *
    * @returns An array of documents
    */
   async findAll(): Promise<T[]> {
@@ -71,8 +71,51 @@ export class BaseService<T extends Document> {
   }
 
   /**
+   * Find documents with pagination
+   *
+   * @param filter - The filter to apply to the query
+   * @param page - The page number
+   * @param limit - The number of documents per page
+   * @param sortBy - The field to sort by ex- createdAt, or other fields
+   * @param order - The order to sort by (asc or desc)
+   * @returns The paginated documents
+   */
+  async findPaginated(
+    filter: FilterQuery<T>,
+    page: number,
+    limit: number,
+    sortBy: string,
+    order: "asc" | "desc"
+  ): Promise<PaginatedResponse<T>> {
+    try {
+      const skip = (page - 1) * limit;
+      
+      const [data, total] = await Promise.all([
+        this.model
+          .find(filter)
+          .sort({ [sortBy]: order === "asc" ? 1 : -1 })
+          .skip(skip)
+          .limit(limit)
+          .lean(),
+        this.model.countDocuments(filter),
+      ]);
+
+      return {
+        data: data as T[],
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+      };
+    } catch (error) {
+      logger.error({ error }, `Error fetching ${this.modelName} list`);
+      throw error;
+    }
+  }
+  
+  /**
    * Update document by ID
-   * 
+   *
    * @param id - The ID of the document to update
    * @param data - The data to update the document with
    * @returns The updated document
@@ -99,7 +142,7 @@ export class BaseService<T extends Document> {
 
   /**
    * Delete document by ID
-   * 
+   *
    * @param id - The ID of the document to delete
    * @returns The deleted document
    */

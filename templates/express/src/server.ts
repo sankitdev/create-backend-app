@@ -5,7 +5,6 @@ import { logger } from "./utils/logger";
 
 const startServer = async () => {
   try {
-    console.log("Came here");
     // Connect to database
     await connectDb();
 

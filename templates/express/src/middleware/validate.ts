@@ -1,19 +1,33 @@
 import { ZodType } from "zod";
 import { Request, Response, NextFunction } from "express";
 
-// Generic middleware – schema must be a Zod schema (ZodType)
-export const validateBody =
-  <Schema extends ZodType<any, any>>(schema: Schema) =>
-  (req: Request, res: Response, next: NextFunction) => {
-    const parsed = schema.safeParse(req.body);
+type SchemaMap = {
+  params?: ZodType;
+  query?: ZodType;
+  headers?: ZodType;
+  body?: ZodType;
+};
 
-    if (!parsed.success) {
-      return res.status(400).json({
-        success: false,
-        errors: parsed.error.issues,
-      });
+export const validate =
+  (schemas: SchemaMap) =>
+  (req: Request, res: Response, next: NextFunction) => {
+    const order: (keyof SchemaMap)[] = ["params", "query", "headers", "body"];
+
+    for (const key of order) {
+      const schema = schemas[key];
+      if (!schema) continue;
+
+      const parsed = schema.safeParse(req[key]);
+      if (!parsed.success) {
+        return res.status(400).json({
+          success: false,
+          errorIn: key, // tells frontend which part failed
+          errors: parsed.error.issues,
+        });
+      }
+
+      req[key] = parsed.data; // assign validated + typed value
     }
 
-    req.body = parsed.data; // typed as inferred output
     return next();
   };

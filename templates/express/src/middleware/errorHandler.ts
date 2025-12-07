@@ -11,7 +11,7 @@ export const errorHandler = (err: Error, req: Request, res: Response) => {
       method: req.method,
       path: req.path,
     },
-    "Request error"
+    "Request error",
   );
 
   res.status(500).json({

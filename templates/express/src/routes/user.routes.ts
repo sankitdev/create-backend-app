@@ -5,4 +5,4 @@ import { getUserByEmailSchema } from "@/validation";
 
 export const userRouter = e.Router();
 
-userRouter.get("/", validate({query: getUserByEmailSchema}), getUserByEmail);
+userRouter.get("/", validate({ query: getUserByEmailSchema }), getUserByEmail);

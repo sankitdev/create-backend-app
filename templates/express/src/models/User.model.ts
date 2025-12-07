@@ -31,7 +31,7 @@ const userSchema = new Schema<IUser>(
       minlength: [6, "Password must be at least 6 characters"],
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export const User = mongoose.model<IUser>("User", userSchema);

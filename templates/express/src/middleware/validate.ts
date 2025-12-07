@@ -10,13 +10,12 @@ type SchemaMap = {
 
 /**
  * Validate incoming request data for body, params, query, headers
- * 
+ *
  * @param schemas - Object containing schemas for body, params, query, headers
  * @returns Error if validation fails, otherwise calls next()
  */
 export const validate =
-  (schemas: SchemaMap) =>
-  (req: Request, res: Response, next: NextFunction) => {
+  (schemas: SchemaMap) => (req: Request, res: Response, next: NextFunction) => {
     const order: (keyof SchemaMap)[] = ["params", "query", "headers", "body"];
 
     for (const key of order) {

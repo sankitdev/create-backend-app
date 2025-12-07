@@ -1,5 +1,6 @@
 import { Model, FilterQuery } from "mongoose";
 import { logger } from "@/utils/logger";
+import { PaginatedResponse } from "@/types/types";
 
 /**
  * Base service class providing common CRUD operations for Mongoose models
@@ -23,10 +24,7 @@ export class BaseService<T> {
   async create(data: Partial<T>): Promise<T> {
     try {
       const document = await this.model.create(data);
-      logger.info(
-        { id: document._id },
-        `${this.modelName} created successfully`
-      );
+      logger.info({ id: document._id }, `${this.modelName} created successfully`);
       return document;
     } catch (error) {
       logger.error({ error }, `Error creating ${this.modelName}`);
@@ -85,11 +83,11 @@ export class BaseService<T> {
     page: number,
     limit: number,
     sortBy: string,
-    order: "asc" | "desc"
+    order: "asc" | "desc",
   ): Promise<PaginatedResponse<T>> {
     try {
       const skip = (page - 1) * limit;
-      
+
       const [data, total] = await Promise.all([
         this.model
           .find(filter)
@@ -112,7 +110,7 @@ export class BaseService<T> {
       throw error;
     }
   }
-  
+
   /**
    * Update document by ID
    *
@@ -125,7 +123,7 @@ export class BaseService<T> {
       const document = await this.model.findByIdAndUpdate(
         id,
         { $set: data },
-        { new: true, runValidators: true }
+        { new: true, runValidators: true },
       );
 
       if (!document) {

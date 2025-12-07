@@ -1,5 +1,6 @@
 import { ZodType } from "zod";
 import { Request, Response, NextFunction } from "express";
+import { HTTP_STATUS } from "@/constants/http";
 
 type SchemaMap = {
   params?: ZodType;
@@ -24,7 +25,7 @@ export const validate =
 
       const parsed = schema.safeParse(req[key]);
       if (!parsed.success) {
-        return res.status(400).json({
+        return res.status(HTTP_STATUS.BAD_REQUEST).json({
           success: false,
           errorIn: key, // tells frontend which part failed
           errors: parsed.error.issues,

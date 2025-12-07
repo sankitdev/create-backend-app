@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { config } from "./config";
-import { logger } from "../utils/logger";
-import { MESSAGES } from "../constants/messages";
+import { config } from "@/config/config";
+import { logger } from "@/utils/logger";
+import { MESSAGES } from "@/constants/messages";
 
 export const connectDb = async () => {
   try {

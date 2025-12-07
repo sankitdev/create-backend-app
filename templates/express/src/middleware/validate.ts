@@ -8,6 +8,12 @@ type SchemaMap = {
   body?: ZodType;
 };
 
+/**
+ * Validate incoming request data for body, params, query, headers
+ * 
+ * @param schemas - Object containing schemas for body, params, query, headers
+ * @returns Error if validation fails, otherwise calls next()
+ */
 export const validate =
   (schemas: SchemaMap) =>
   (req: Request, res: Response, next: NextFunction) => {

@@ -1,7 +1,7 @@
-import { app } from "./app";
-import { config } from "./config/config";
-import { connectDb } from "./config/database";
-import { logger } from "./utils/logger";
+import { app } from "@/app";
+import { config } from "@/config/config";
+import { connectDb } from "@/config/database";
+import { logger } from "@/utils/logger";
 
 const startServer = async () => {
   try {

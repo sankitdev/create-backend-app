@@ -1,11 +1,11 @@
-import { Model, Document, FilterQuery } from "mongoose";
-import { logger } from "../utils/logger";
+import { Model, FilterQuery } from "mongoose";
+import { logger } from "@/utils/logger";
 
 /**
  * Base service class providing common CRUD operations for Mongoose models
  * @template T - The document type extending Mongoose Document
  */
-export class BaseService<T extends Document> {
+export class BaseService<T> {
   protected model: Model<T>;
   protected modelName: string;
 

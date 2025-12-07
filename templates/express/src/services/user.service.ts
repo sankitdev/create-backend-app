@@ -1,5 +1,5 @@
-import { IUser, User } from "../models/User.model";
-import { BaseService } from "./base.service";
+import { IUser, User } from "@/models/user.model";
+import { BaseService } from "@/services/base.service";
 
 export class UserService extends BaseService<IUser> {
   constructor() {

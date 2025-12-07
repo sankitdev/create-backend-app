@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { logger } from "../utils/logger";
-import { config } from "../config/config";
+import { logger } from "@/utils/logger";
+import { config } from "@/config/config";
 
 const { isDevelopment } = config;
 export const errorHandler = (err: Error, req: Request, res: Response) => {

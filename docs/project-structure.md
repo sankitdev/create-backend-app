@@ -21,6 +21,9 @@ my-backend-app/
 │   ├── config/                # Configuration files
 │   │   ├── config.ts          # Environment variables & app config
 │   │   └── database.ts        # Database connection setup
+│   ├── constants/             # Constants files
+│   │   ├── http.ts            # HTTP status codes
+│   │   └── messages.ts        # All application wise messages
 │   ├── controllers/           # Request handlers
 │   │   └── user.controller.ts # User-related endpoints logic
 │   ├── middleware/            # Express middleware
@@ -44,8 +47,10 @@ my-backend-app/
 ├── dist/                      # Compiled JavaScript (after build)
 ├── .env                       # Environment variables (gitignored)
 ├── .env.example               # Example environment variables
+├── .eslintrc.json             # ESLint configuration
 ├── .gitignore                 # Git ignore rules
 ├── package.json               # Project dependencies
+├── README.md                  # Project documentation
 └── tsconfig.json              # TypeScript configuration
 ```
 
@@ -288,6 +293,10 @@ The scaffolded project uses consistent naming:
 | **Middleware** | `{purpose}.ts` | `errorHandler.ts` |
 | **Utils** | `{purpose}.ts` | `asyncHandler.ts` |
 
+ Don't waste time on naming conventions choose one and follow.
+ Someone can like kebab case like `user-controller.ts` and someone can like `userController.ts`.
+ But in the end naming doesn't matter. What matters is your logic is clean and easy to understand.
+ 
 ## Best Practices
 
 ### Controllers

@@ -172,6 +172,8 @@ The generated project includes the following npm scripts:
 | **dev** | `npm run dev` | Start development server with hot reload using `tsx watch` |
 | **build** | `npm run build` | Compile TypeScript to JavaScript in the `dist/` folder |
 | **start** | `npm start` | Run the production build from `dist/server.js` |
+| **lint** | `npm run lint` | Run ESLint to check for code quality issues |
+| **format** | `npm run format` | Run Prettier to format code |
 | **test** | `npm test` | Placeholder for tests (to be implemented) |
 
 ### Production Build

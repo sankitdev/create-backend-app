@@ -1,289 +1,118 @@
 # 🚀 Create Backend App
 
-A CLI tool to scaffold production-ready backend applications with industry best practices baked in. Stop wasting time on boilerplate and start building features!
+**Stop wasting time on backend boilerplate. Start building features in 60 seconds.**
 
-## ✨ Features
+A zero-config CLI that scaffolds production-ready, TypeScript-first backend applications with industry best practices baked in. Focus on your business logic, not project setup.
 
-- **🎯 Zero-Config Setup** - Get a fully configured backend project in seconds
-- **🏗️ Production-Ready Architecture** - MVC pattern with service layer, proper error handling, and validation
-- **📦 Modern Stack** - TypeScript, Express, MongoDB (Mongoose), Zod validation
-- **🔒 Security First** - Helmet, CORS, environment variables, and security best practices
-- **📝 Structured Logging** - Pino logger with pretty printing for development
-- **✅ Input Validation** - Zod schemas for type-safe request validation
-- **🎨 Clean Code** - Well-organized folder structure with separation of concerns
+## 🎯 The Problem It Solves
 
-## 📋 Prerequisites
+Setting up a new backend project means hours of:
+- ⏰ Configuring TypeScript, linters, and build tools
+- 🏗️ Architecting folder structures and design patterns
+- 🔒 Setting up validation, error handling, and security
+- 📦 Choosing and configuring the right dependencies
 
-Before you begin, ensure you have the following installed:
+**This tool does all of that in one command.**
 
-- **Node.js** (v18 or higher)
-- **npm** or **yarn** or **pnpm**
-- **MongoDB** (local installation or MongoDB Atlas account)
+## ✨ What You Get
 
-## 🚀 Installation
+A fully-configured backend with:
+- **TypeScript-First** - Full type safety from request to database
+- **Production-Ready Architecture** - Service layer, controllers, proper separation of concerns
+- **Smart Validation** - Zod schemas that validate body, params, query, and headers
+- **Security Baked In** - Helmet, CORS, environment variables
+- **Clean Code** - MVC pattern with business logic in services
+- **Zero Config** - Everything works out of the box
 
-### Using npx (Recommended)
+### Tech Stack
+Express.js • TypeScript • MongoDB (Mongoose) • Zod • Pino Logger • Helmet • CORS
 
-No installation required! Run the CLI directly:
-
-```bash
-npx @sankitdev/create-backend-app my-project-name
-```
-
-### Global Installation
+## 🚀 Quick Start
 
 ```bash
-npm install -g @sankitdev/create-backend-app
-create-backend-app my-project-name
-```
+# Create your project
+npx @sankitdev/create-backend-app my-api
+cd my-api
 
-### Interactive Mode
-
-If you don't provide a project name, the CLI will prompt you:
-
-```bash
-npx @sankitdev/create-backend-app
-# ✔ What is your project named? › my-backend-app
-```
-
-## 🎯 Usage
-
-### 1. Create Your Project
-
-```bash
-npx @sankitdev/create-backend-app my-awesome-api
-cd my-awesome-api
-```
-
-### 2. Install Dependencies
-
-```bash
+# Install dependencies
 npm install
-```
 
-### 3. Set Up Environment Variables
-
-Copy the example environment file and configure it:
-
-```bash
+# Configure environment
 cp .env.example .env
-```
+# Edit .env with your MongoDB URI
 
-Edit `.env` with your configuration:
-
-```env
-# Server Configuration
-PORT=3000
-NODE_ENV=development
-
-# Database
-MONGO_URI=mongodb://localhost:27017/your-database-name
-```
-
-### 4. Start Development Server
-
-```bash
+# Start building! 🎉
 npm run dev
 ```
 
-Your server will be running at `http://localhost:3000`
+Your backend is now running at `http://localhost:3000` with:
+- ✅ TypeScript compilation
+- ✅ Hot reload with tsx
+- ✅ Example user CRUD endpoints
+- ✅ Request validation middleware
+- ✅ Error handling
+- ✅ Database connection
 
-### 5. Test the API
+## 📖 Documentation
 
-```bash
-# Health check
-curl http://localhost:3000/health
+- **[Getting Started](./docs/getting-started.md)** - Detailed setup and configuration
+- **[Project Structure](./docs/project-structure.md)** - Architecture and folder organization
+- **[API Reference](./docs/api-reference.md)** - Middleware and utilities documentation
+- **[Adding Features Guide](./docs/guides/adding-features.md)** - Step-by-step tutorial
 
-# Example user endpoints (from the scaffolded template)
-curl http://localhost:3000/api/users
-```
+## 🎨 How Validation Works
 
-## 📁 Project Structure
-
-The scaffolded project follows a clean, scalable architecture:
-
-```
-my-awesome-api/
-├── src/
-│   ├── app.ts                 # Express app configuration
-│   ├── server.ts              # Server entry point & startup logic
-│   ├── config/                # Configuration files
-│   │   ├── config.ts          # Environment variables & app config
-│   │   └── database.ts        # Database connection setup
-│   ├── controllers/           # Request handlers
-│   │   └── user.controller.ts # User-related endpoints logic
-│   ├── middleware/            # Express middleware
-│   │   ├── errorHandler.ts   # Global error handling middleware
-│   │   └── validate.ts        # Request validation middleware
-│   ├── models/                # Database models
-│   │   └── User.model.ts      # User schema & model (Mongoose)
-│   ├── routes/                # API route definitions
-│   │   ├── index.ts           # Route exports
-│   │   └── user.routes.ts     # User routes
-│   ├── services/              # Business logic layer
-│   │   ├── base.service.ts    # Base service class
-│   │   ├── index.ts           # Service exports
-│   │   └── user.service.ts    # User business logic
-│   ├── utils/                 # Utility functions
-│   │   ├── asyncHandler.ts    # Async error wrapper
-│   │   └── logger.ts          # Pino logger setup
-│   └── validation/            # Zod validation schemas
-│       ├── index.ts           # Validation exports
-│       └── user.validation.ts # User validation schemas
-├── .env.example               # Example environment variables
-├── .gitignore                 # Git ignore rules
-├── package.json               # Project dependencies
-└── tsconfig.json              # TypeScript configuration
-```
-
-### 📂 Folder Explanations
-
-| Folder | Purpose |
-|--------|---------|
-| **`config/`** | Contains all configuration files including environment variables and database connection setup |
-| **`controllers/`** | Handle HTTP requests and responses. Thin layer that delegates business logic to services |
-| **`middleware/`** | Express middleware functions for error handling, validation, authentication, etc. |
-| **`models/`** | Mongoose schemas and models representing your database collections |
-| **`routes/`** | API route definitions that map URLs to controller functions |
-| **`services/`** | Business logic layer. Contains reusable business operations and database interactions |
-| **`utils/`** | Helper functions and utilities used across the application |
-| **`validation/`** | Zod schemas for request validation and type safety |
-
-### 🔄 Request Flow
-
-```
-Request → Routes → Middleware (validation) → Controller → Service → Model → Database
-                                                ↓
-Response ← Controller ← Service ← Model ← Database
-```
-
-## 🛠️ Available Scripts
-
-The generated project includes these npm scripts:
-
-```json
-{
-  "dev": "tsx watch src/server.ts",     // Start development server with hot reload
-  "build": "tsc",                        // Compile TypeScript to JavaScript
-  "start": "node dist/server.js",        // Run production build
-  "test": "echo 'Tests coming soon'"     // Placeholder for tests
-}
-```
-
-## ⚙️ Tech Stack
-
-The scaffolded project uses:
-
-- **[Express.js](https://expressjs.com/)** v5.x - Fast, unopinionated web framework
-- **[TypeScript](https://www.typescriptlang.org/)** - Type safety and better developer experience
-- **[Mongoose](https://mongoosejs.com/)** - MongoDB object modeling
-- **[Zod](https://zod.dev/)** - TypeScript-first schema validation
-- **[Pino](https://getpino.io/)** - Super fast, low overhead logging
-- **[Helmet](https://helmetjs.github.io/)** - Security headers middleware
-- **[CORS](https://github.com/expressjs/cors)** - Cross-origin resource sharing
-- **[dotenv](https://github.com/motdotla/dotenv)** - Environment variable management
-
-## 🚧 Current Limitations
-
-- **Framework Support**: Currently only supports **Express.js**
-  - **Coming Soon**: Fastify, NestJS, and more!
-- **Database**: Currently scaffolds with **MongoDB** (Mongoose)
-  - **Coming Soon**: PostgreSQL, MySQL, and Prisma support
-- **Testing**: Boilerplate doesn't include test setup yet
-  - **Coming Soon**: Jest/Vitest configuration with example tests
-- **Authentication**: No built-in auth scaffolding
-  - **Coming Soon**: JWT authentication, Passport.js integration
-
-## 🗺️ Roadmap
-
-- [ ] Add Fastify template support
-- [ ] Add NestJS template support
-- [ ] Add PostgreSQL/MySQL database options
-- [ ] Add Prisma ORM option
-- [ ] Include authentication scaffolding (JWT, OAuth)
-- [ ] Add testing setup (Jest/Vitest)
-- [ ] Add Docker configuration
-- [ ] Add CI/CD examples (GitHub Actions)
-- [ ] Add API documentation generation (Swagger/OpenAPI)
-
-## 💡 Example: Adding a New Feature
-
-### 1. Create a Model (`src/models/Post.model.ts`)
-
-```typescript
-import mongoose from 'mongoose';
-
-const postSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  content: { type: String, required: true },
-  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
-}, { timestamps: true });
-
-export const Post = mongoose.model('Post', postSchema);
-```
-
-### 2. Create Validation (`src/validation/post.validation.ts`)
+The generated project includes a powerful validation middleware that works on all request parts:
 
 ```typescript
 import { z } from 'zod';
+import { validate } from './middleware/validate';
 
-export const createPostSchema = z.object({
-  body: z.object({
-    title: z.string().min(1).max(200),
-    content: z.string().min(1)
-  })
-});
+// Validate multiple parts at once
+app.post('/users/:id/posts', 
+  validate({
+    params: z.object({ id: z.string().uuid() }),
+    body: z.object({ title: z.string(), content: z.string() }),
+    query: z.object({ publish: z.enum(['true', 'false']).optional() })
+  }),
+  createPostHandler
+);
 ```
 
-### 3. Create Service (`src/services/post.service.ts`)
+See the [API Reference](./docs/api-reference.md) for complete documentation.
 
-```typescript
-import { BaseService } from './base.service';
-import { Post } from '../models/Post.model';
+## 🗺️ What's Next
 
-export class PostService extends BaseService {
-  async createPost(data: any) {
-    return await Post.create(data);
-  }
-}
+After scaffolding your project, you'll typically want to:
 
-export const postService = new PostService();
-```
+1. **Define your data models** - Add Mongoose schemas in `src/models/`
+2. **Create validation schemas** - Add Zod schemas in `src/validation/`
+3. **Write business logic** - Add services in `src/services/`
+4. **Build endpoints** - Add controllers and routes
 
-### 4. Create Controller (`src/controllers/post.controller.ts`)
+See the [Adding Features Guide](./docs/guides/adding-features.md) for a complete walkthrough.
 
-```typescript
-import { asyncHandler } from '../utils/asyncHandler';
-import { postService } from '../services';
+## 🚧 Current Support & Roadmap
 
-export const createPost = asyncHandler(async (req, res) => {
-  const post = await postService.createPost(req.body);
-  res.status(201).json({ success: true, data: post });
-});
-```
+**Currently Supports:**
+- ✅ Express.js with TypeScript
+- ✅ MongoDB with Mongoose
+- ✅ Zod validation
 
-### 5. Create Routes (`src/routes/post.routes.ts`)
-
-```typescript
-import { Router } from 'express';
-import { createPost } from '../controllers/post.controller';
-import { validate } from '../middleware/validate';
-import { createPostSchema } from '../validation/post.validation';
-
-export const postRouter = Router();
-postRouter.post('/', validate(createPostSchema), createPost);
-```
-
-### 6. Register Routes (`src/app.ts`)
-
-```typescript
-import { postRouter } from './routes/post.routes';
-app.use('/api/posts', postRouter);
-```
+**Coming Soon:**
+- [ ] Fastify and NestJS templates
+- [ ] PostgreSQL/MySQL with Prisma
+- [ ] JWT authentication scaffolding
+- [ ] Testing setup (Jest/Vitest)
+- [ ] Docker configuration
+- [ ] Swagger/OpenAPI documentation generation
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Found a bug or have a feature request? 
+
+- **Issues:** [GitHub Issues](https://github.com/sankitdev/create-backend-app/issues)
+- **Pull Requests:** [Contributing Guide](./CONTRIBUTING.md)
 
 ## 📄 License
 
@@ -292,13 +121,13 @@ ISC
 ## 👤 Author
 
 **sankitdev**
-
 - GitHub: [@sankitdev](https://github.com/sankitdev)
-
-## 🐛 Issues
-
-Found a bug or have a feature request? Please open an issue on [GitHub](https://github.com/sankitdev/create-backend-app/issues).
+- NPM: [@sankitdev](https://www.npmjs.com/~sankitdev)
 
 ## ⭐ Show Your Support
 
-Give a ⭐️ if this project helped you!
+Give a ⭐️ if this project helped you save time!
+
+---
+
+**Built with ❤️ to help developers focus on what matters: building great APIs.**

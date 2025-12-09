@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+**/dist/
+
+# Template-specific exclusions
+templates/**/node_modules/
+templates/**/dist/
+templates/**/.env
+templates/**/package-lock.json
+templates/**/pnpm-lock.yaml
+templates/**/yarn.lock
+
+# Development files
+*.log
+*.tgz
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test coverage
+coverage/
+.nyc_output/

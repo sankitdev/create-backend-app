@@ -1,6 +1,6 @@
 {
   "name": "@sankitdev/create-backend-app",
-  "version": "0.1.2",
+  "version": "0.1.1",
   "description": "",
   "main": "dist/bin/index.js",
   "bin": {
@@ -8,7 +8,8 @@
   },
   "files": [
     "dist",
-    "templates"
+    "templates",
+    "docs"
   ],
   "scripts": {
     "build": "tsc",

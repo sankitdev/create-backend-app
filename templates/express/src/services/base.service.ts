@@ -54,13 +54,14 @@ export class BaseService<T> {
   }
 
   /**
-   * Find all documents
+   * Find all documents based on filter
    *
+   * @param filter - The filter to apply to the query
    * @returns An array of documents
    */
-  async findAll(): Promise<T[]> {
+  async findAll(filter: FilterQuery<T> = {}): Promise<T[]> {
     try {
-      const documents = await this.model.find();
+      const documents = await this.model.find(filter);
       return documents;
     } catch (error) {
       logger.error({ error }, `Error fetching ${this.modelName} list`);

@@ -1,5 +1,13 @@
+// dotenv is used to load environment variables from .env file
 import "dotenv/config";
 
+/**
+ * This function is used to get the environment variables
+ * It also give type safety and error handling if environment variable is not found
+ * @param key The key of the environment variable
+ * @param defaultValue The default value of the environment variable
+ * @returns The value of the environment variable
+ */
 const getEnv = (key: string, defaultValue?: string): string => {
   const value = process.env[key] || defaultValue;
 

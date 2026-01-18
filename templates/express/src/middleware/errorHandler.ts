@@ -4,6 +4,7 @@ import { config } from "@/config/config";
 import { HTTP_STATUS } from "@/constants/http";
 
 const { isDevelopment } = config;
+
 export const errorHandler = (err: Error, req: Request, res: Response) => {
   logger.error(
     {

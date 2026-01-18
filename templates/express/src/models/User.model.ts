@@ -1,5 +1,15 @@
+/**
+ * This is an example of a User model
+ */
 import mongoose, { Schema } from "mongoose";
 
+/**
+ * Creation of interface for User model
+ * This helps in type checking and autocompletion
+ * while working with schema and model
+ * You can also import this interface in other files
+ * for type checking and autocompletion
+ */
 export interface IUser {
   name: string;
   email: string;
@@ -8,6 +18,11 @@ export interface IUser {
   updatedAt: Date;
 }
 
+/**
+ * Creation of schema for User model
+ * Schema is the blueprint of the model
+ * It defines the structure of the model
+ */
 const userSchema = new Schema<IUser>(
   {
     name: {
@@ -28,10 +43,15 @@ const userSchema = new Schema<IUser>(
     password: {
       type: String,
       required: [true, "Password is required"],
-      minlength: [6, "Password must be at least 6 characters"],
     },
   },
-  { timestamps: true },
+  { timestamps: true }, // This will add createdAt and updatedAt fields
 );
 
+/**
+ * Creation of model for User
+ * Model is the class of the schema
+ * It defines the structure of the document
+ * This is the final model which create the collection in the database
+ */
 export const User = mongoose.model<IUser>("User", userSchema);

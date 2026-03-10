@@ -212,8 +212,36 @@ Global error handling middleware that catches all errors.
 {
   "success": false,
   "message": "Error message here",
+  "code": "NOT_FOUND",
   "stack": "Error stack (development only)"
 }
+```
+
+`code` is only present when the error is an `AppError` subclass.
+
+### Custom errors (AppError)
+
+**Location:** `src/utils/errors.ts`
+
+Throw these in services or controllers so the global error handler returns the correct HTTP status:
+
+| Class              | Status | Use case                    |
+|--------------------|--------|-----------------------------|
+| `ValidationError`  | 400    | Invalid input               |
+| `UnauthorizedError`| 401    | Not authenticated           |
+| `ForbiddenError`   | 403    | Not allowed                 |
+| `NotFoundError`    | 404    | Resource not found          |
+| `ConflictError`   | 409    | Duplicate or conflict       |
+| `AppError`         | (custom)| Base class; set statusCode  |
+
+**Example:**
+
+```typescript
+import { NotFoundError, ValidationError } from '@/utils/errors';
+
+const user = await User.findById(id);
+if (!user) throw new NotFoundError('User not found');
+if (!isValid(data)) throw new ValidationError('Invalid email');
 ```
 
 ### Usage
@@ -321,13 +349,19 @@ import { User } from '../models/User.model';
 class UserService extends BaseService<typeof User> {
   // Inherited methods from BaseService:
   // - findAll(filter?, options?)
-  // - findPaginated(filter, page, limit, sortBy, order)
+  // - findPaginated(filter, page, limit, sortBy, order, search?)
   // - findById(id)
   // - findOne(filter)
   // - create(data)
   // - update(id, data)
   // - delete(id)
   // - count(filter?)
+  
+  // findPaginated optional search: case-insensitive text across fields
+  // await this.findPaginated({}, 1, 10, 'createdAt', 'desc', {
+  //   fields: ['name', 'email'],
+  //   term: req.query.q as string,
+  // });
   
   // Add your custom methods
   async findByEmail(email: string) {

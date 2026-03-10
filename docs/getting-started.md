@@ -50,14 +50,18 @@ create-backend-app my-project-name
 
 ### Interactive Mode
 
-If you don't provide a project name, the CLI will prompt you:
+If you don't provide a project name, the CLI will prompt you for it and for optional features:
 
 ```bash
 npx @sankitdev/create-backend-app
 
-# You'll see:
-# ✔ What is your project named? › my-backend-app
+# You'll be asked:
+# • Project name (e.g. my-backend-app)
+# • Enable API rate limiting? (yes/no)
+# • Authentication strategy: None / Header (Bearer) / Cookie
 ```
+
+Your choices are written to `src/config/features.ts` so you can change them later without re-scaffolding.
 
 ## Project Setup
 

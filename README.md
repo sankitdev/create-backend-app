@@ -59,6 +59,7 @@ Your backend is now running at `http://localhost:3000` with:
 - **[Project Structure](./docs/project-structure.md)** - Architecture and folder organization
 - **[API Reference](./docs/api-reference.md)** - Middleware and utilities documentation
 - **[Adding Features Guide](./docs/guides/adding-features.md)** - Step-by-step tutorial
+- **[Dependencies and Versions](./docs/dependencies-and-versions.md)** - How dependency versions are chosen and how to stay up to date
 
 ## 🎨 How Validation Works
 

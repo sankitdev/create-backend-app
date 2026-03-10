@@ -23,6 +23,10 @@ export const config = {
   mongoURI: getEnv("MONGO_URI"),
   nodeEnv: getEnv("NODE_ENV", "development"),
 
+  // optional: used when rate limit or auth is enabled via features
+  rateLimitMax: parseInt(process.env.RATE_LIMIT_MAX ?? "100", 10),
+  jwtSecret: process.env.JWT_SECRET,
+
   // computed values
   isDevelopment: process.env.NODE_ENV === "development",
   isProduction: process.env.NODE_ENV === "production",

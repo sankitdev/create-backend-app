@@ -1,6 +1,7 @@
 import { Model, FilterQuery } from "mongoose";
 import { logger } from "@/utils/logger";
 import { PaginatedResponse } from "@/types/types";
+import { NotFoundError } from "@/utils/errors";
 
 /**
  * Base service class providing common CRUD operations for Mongoose models
@@ -43,7 +44,7 @@ export class BaseService<T> {
       const document = await this.model.findById(id);
 
       if (!document) {
-        throw new Error(`${this.modelName} not found`);
+        throw new NotFoundError(`${this.modelName} not found`);
       }
 
       return document;
@@ -70,13 +71,14 @@ export class BaseService<T> {
   }
 
   /**
-   * Find documents with pagination
+   * Find documents with pagination and optional text search
    *
    * @param filter - The filter to apply to the query
    * @param page - The page number
    * @param limit - The number of documents per page
-   * @param sortBy - The field to sort by ex- createdAt, or other fields
+   * @param sortBy - The field to sort by (e.g. createdAt)
    * @param order - The order to sort by (asc or desc)
+   * @param search - Optional: search term and fields for case-insensitive regex match
    * @returns The paginated documents
    */
   async findPaginated(
@@ -128,7 +130,7 @@ export class BaseService<T> {
       );
 
       if (!document) {
-        throw new Error(`${this.modelName} not found`);
+        throw new NotFoundError(`${this.modelName} not found`);
       }
 
       logger.info({ id }, `${this.modelName} updated successfully`);
@@ -150,7 +152,7 @@ export class BaseService<T> {
       const document = await this.model.findByIdAndDelete(id);
 
       if (!document) {
-        throw new Error(`${this.modelName} not found`);
+        throw new NotFoundError(`${this.modelName} not found`);
       }
 
       logger.info({ id }, `${this.modelName} deleted successfully`);

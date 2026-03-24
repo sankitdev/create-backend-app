@@ -27,7 +27,6 @@
     "express-rate-limit": "^7.4.1",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.19.4",
     "pino": "^10.1.0",
     "zod": "^4.1.12"
   },
@@ -38,7 +37,7 @@
     "@types/express": "^5.0.5",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^24.10.1",
-    "eslint": "^9.39.1",  
+    "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "globals": "^16.5.0",
